@@ -27,6 +27,12 @@ iface eth0 inet static
 
 
 @logg
+def restart_networking():
+    do_commands(["ip addr flush dev eth0",
+                 "systemctl restart networking"])
+
+
+@logg
 def write_resolv():
     text = f"""
 nameserver {DNS}
