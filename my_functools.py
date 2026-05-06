@@ -10,7 +10,7 @@ def do_command(command: str, sudo: bool = True):
         raise RuntimeError(f"Command {command} failed, with exit code {result.returncode}")
 
 
-def do_commands(commands: list[str]):
+def do_commands(commands: list):
     for command in commands:
         do_command(command)
 
