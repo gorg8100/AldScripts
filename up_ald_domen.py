@@ -97,7 +97,7 @@ def download_ald():
 @logg
 def error_checking_download_ald():
     print("Проверка на ошибки при скачивании.")
-    do_command("grep 'error:' /var/log/apt/term.log")
+    do_command("grep 'error:' /var/log/apt/term.log", check_code=False)
 
 
 @logg

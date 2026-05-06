@@ -2,11 +2,11 @@ import subprocess
 import time
 
 
-def do_command(command: str, sudo: bool = True, inp: str = None):
+def do_command(command: str, sudo: bool = True, inp: str = None, check_code: bool = True):
     if sudo:
         command = "sudo " + command
     result = subprocess.run(command, text=True, shell=True, input=inp)
-    if result.returncode != 0:
+    if check_code and result.returncode != 0:
         raise RuntimeError(f"Command {command} failed, with exit code {result.returncode}")
 
 
