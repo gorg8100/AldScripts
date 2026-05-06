@@ -118,6 +118,7 @@ def main():
     write_resolv()
     write_hosts()
     set_hostname()
+    write_apt_sources()
     write_apt_aldpro_list()
     write_package_priority()
     sudo_heartbeat()
