@@ -6,7 +6,6 @@ def do_command(command: str, sudo: bool = True):
         command = "sudo " + command
     result = subprocess.run(command, text=True, shell=True)
     if result.returncode != 0:
-        print(result.stderr)
         raise RuntimeError(f"Command {command} failed, with exit code {result.returncode}")
 
 
@@ -16,7 +15,7 @@ def do_commands(commands: list):
 
 
 def write_file(file: str, text: str):
-    do_command(f"echo '{text}' > {file}")
+    do_command(f"sudo bash -c 'echo \"{text}\" > {file}''")
 
 
 def sudo_heartbeat():
