@@ -27,7 +27,7 @@ iface eth0 inet static
 
 
 @logg
-def restart_networking():
+def restart_and_switch_networking():
     do_commands(["ip addr flush dev eth0",
                  "systemctl restart networking"])
 
@@ -134,7 +134,7 @@ def main():
     sudo_heartbeat()
     stop_network_manager()
     write_network_interfaces()
-    restart_networking()
+    restart_and_switch_networking()
     write_resolv()
     write_hosts()
     set_hostname()
