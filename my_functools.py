@@ -4,7 +4,7 @@ import subprocess
 def do_command(command: str, sudo: bool = True):
     if sudo:
         command = "sudo " + command
-    result = subprocess.run(command)
+    result = subprocess.run(command, text=True, shell=True)
     if result.returncode != 0:
         print(result.stderr)
         raise RuntimeError(f"Command {command} failed, with exit code {result.returncode}")
