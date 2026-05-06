@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 
 def do_command(command: str, sudo: bool = True, inp: str = None):
@@ -20,3 +21,15 @@ def write_file(file: str, text: str):
 
 def sudo_heartbeat():
     do_command("-v")
+
+
+def logg(func):
+    def wrapper(*args, **kwargs):
+        print('==============================')
+        print(f'start {func.__name__}()')
+        original_result = func(*args, **kwargs)
+        print(f'stop {func.__name__}()')
+        time.sleep(5)
+        return original_result
+
+    return wrapper
