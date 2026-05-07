@@ -1,5 +1,6 @@
 import subprocess
 import time
+import datetime
 
 
 def do_command(command: str, sudo: bool = False, inp: str = None, check_code: bool = True) -> int:
@@ -17,20 +18,19 @@ def do_commands(commands: list):
 
 
 def write_file(file: str, text: str):
-    do_command(f"tee {file}", inp=text)
-
-
-def sudo_heartbeat():
-    pass
-    #do_command("-v")
+    with open(file, "w") as file:
+        file.write(text)
 
 
 def logg(func):
     def wrapper(*args, **kwargs):
         print('==============================')
         print(f'start {func.__name__}()')
+        start_time = time.time()
         original_result = func(*args, **kwargs)
+        end_time = time.time()
         print(f'stop {func.__name__}()')
+        print("time spent", str(datetime.timedelta(seconds=end_time-start_time)))
         time.sleep(5)
         return original_result
 

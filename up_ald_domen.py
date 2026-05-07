@@ -102,8 +102,9 @@ def download_ald():
 
 @logg
 def error_checking_download_ald():
-    print("Проверка на ошибки при скачивании.")
-    do_command("grep 'error:' /var/log/apt/term.log", check_code=False)
+    print("Check for errors when downloading")
+    if do_command("grep 'error:' /var/log/apt/term.log", check_code=False) == 0:
+        raise RuntimeError("An error occurred while downloading ald pro packages")
 
 
 @logg
@@ -122,7 +123,7 @@ def restart_networking():
 
 @logg
 def server_promotion():
-    do_command(f"aldpro-server-install -d {DOMAIN} -n {HOSTNAME} --ip {ADDRESS} --no-reboot -p {PASSWORD}")
+    do_command(f"aldpro-server-install -d {DOMAIN} -n {HOSTNAME} --ip {ADDRESS} --no-reboot", inp=PASSWORD)
 
 
 @logg
@@ -131,7 +132,6 @@ def reboot():
 
 
 def main():
-    sudo_heartbeat()
     stop_network_manager()
     write_network_interfaces()
     restart_and_switch_networking()
@@ -141,15 +141,12 @@ def main():
     write_apt_sources()
     write_apt_aldpro_list()
     write_package_priority()
-    sudo_heartbeat()
     apt_update()
     stop_avahi()
-    sudo_heartbeat()
     download_ald()
     error_checking_download_ald()
     write_resolv_local_dns()
     restart_networking()
-    sudo_heartbeat()
     server_promotion()
     reboot()
     return
