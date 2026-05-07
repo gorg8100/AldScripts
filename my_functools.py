@@ -21,7 +21,8 @@ def write_file(file: str, text: str):
 
 
 def sudo_heartbeat():
-    do_command("-v")
+    pass
+    #do_command("-v")
 
 
 def logg(func):
