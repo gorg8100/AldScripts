@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo python3 up_ald_domen.py
+sudo python3 src/up_ald_domen.py

@@ -1,3 +1,4 @@
+import os
 import subprocess
 import time
 import datetime
@@ -17,8 +18,13 @@ def do_commands(commands: list):
         do_command(command)
 
 
-def write_file(file: str, text: str):
-    with open(file, "w") as file:
+def mkdir_p(dir_path: str):
+    if not os.path.exists(dir_path):
+        os.makedirs(dir_path)
+
+
+def write_file(file_path: str, text: str, make_path: bool = False):
+    with open(file_path, "w") as file:
         file.write(text)
 
 
@@ -30,7 +36,7 @@ def logg(func):
         original_result = func(*args, **kwargs)
         end_time = time.time()
         print(f'stop {func.__name__}()')
-        print("time spent", str(datetime.timedelta(seconds=end_time-start_time)))
+        print("time spent", str(datetime.timedelta(seconds=end_time - start_time)))
         time.sleep(5)
         return original_result
 
