@@ -52,12 +52,12 @@ def download_ald():
 
 @logg
 def domain_entry():
-    orgunits_param = "--orgunits \"\""
+    orgunits_param = ""
     if ORGUNITS != "":
         orgunits_param = f"--orgunits {ORGUNITS}"
     do_command(
-        f"aldpro-client-installer --guiless --validate --domain {DOMAIN} --account {DOMAIN_USER} --host {HOSTNAME} {orgunits_param}",
-        inp=DOMAIN_USER_PASSWORD)
+        f"aldpro-client-installer --guiless --validate --domain {DOMAIN} --account {DOMAIN_USER} --password '{DOMAIN_USER_PASSWORD}' --host {HOSTNAME} {orgunits_param}",
+        )
 
 
 def main():
