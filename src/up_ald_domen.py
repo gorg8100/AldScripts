@@ -71,7 +71,8 @@ def server_promotion():
 
 
 def main():
-    stop_network_manager()
+    if STOP_NETWORK_MANAGER:
+        stop_network_manager()
     write_network_interfaces(ADDRESS, NETMASK, GATEWAY)
     restart_and_switch_networking()
     write_resolv(DNS, DOMAIN)
