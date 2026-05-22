@@ -52,7 +52,7 @@ def download_ald():
 
 @logg
 def domain_entry():
-    orgunits_param = ""
+    orgunits_param = "--orgunits \"\""
     if ORGUNITS != "":
         orgunits_param = f"--orgunits {ORGUNITS}"
     do_command(
@@ -83,6 +83,7 @@ def main():
     apt_update()
 
     download_ald()
+    domain_entry()
     reboot()
     return
 
