@@ -56,7 +56,7 @@ def domain_entry():
     if ORGUNITS != "":
         orgunits_param = f"--orgunits {ORGUNITS}"
     do_command(
-        f"aldpro-client-installer --guiless --validate --domain {DOMAIN} --account {DOMAIN_USER} --password '{DOMAIN_USER_PASSWORD}' --host {HOSTNAME} {orgunits_param}",
+        f"aldpro-client-installer --guiless --force --domain {DOMAIN} --account {DOMAIN_USER} --password '{DOMAIN_USER_PASSWORD}' --host {HOSTNAME} {orgunits_param}",
         )
 
 
