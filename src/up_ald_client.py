@@ -84,7 +84,7 @@ def main():
 
     download_ald()
     domain_entry()
-    reboot()
+    # reboot()
     return
 
 
