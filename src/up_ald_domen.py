@@ -92,7 +92,8 @@ def main():
     write_package_priority()
     apt_update()
 
-    stop_avahi()
+    if STOP_AVAHI:
+        stop_avahi()
 
     download_ald()
     error_checking_download_ald()
