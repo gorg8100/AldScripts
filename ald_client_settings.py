@@ -9,7 +9,7 @@ GATEWAY = "10.0.2.1"
 HOSTNAME = "pcct"
 DOMAIN = "ald.company.lan"
 
-DOMAIN_ADDRESS = "8.8.8.8"
+DOMAIN_ADDRESS = "10.0.2.10"
 DOMAIN_USER = "admin"
 DOMAIN_USER_PASSWORD = "12345678"
 
