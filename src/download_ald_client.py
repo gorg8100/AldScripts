@@ -1,8 +1,10 @@
+import sys
+import os
+
 from my_functools import (do_command,
                           write_file,
                           logg,
                           mkdir_p)
-from ald_client_settings import *
 from general_commands import (stop_network_manager,
                               write_network_interfaces,
                               restart_and_switch_networking,
@@ -13,6 +15,11 @@ from general_commands import (stop_network_manager,
                               reboot,
                               set_hostname,
                               restart_networking)
+
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT_DIR)
+
+from ald_client_settings import *
 
 FULL_HOSTNAME = HOSTNAME + "." + DOMAIN
 
@@ -57,7 +64,12 @@ def domain_entry():
         orgunits_param = f"--orgunits {ORGUNITS}"
     do_command(
         f"aldpro-client-installer --guiless --force --domain {DOMAIN} --account {DOMAIN_USER} --password '{DOMAIN_USER_PASSWORD}' --host {HOSTNAME} {orgunits_param}",
-        )
+    )
+
+
+@logg
+def restart_fly():
+    do_command("systemctl restart fly-dm")
 
 
 def main():
@@ -83,7 +95,9 @@ def main():
     apt_update()
 
     download_ald()
-    domain_entry()
+    if RESTART_FLY:
+        restart_fly()
+    # domain_entry()
     # reboot()
     return
 

@@ -1,8 +1,11 @@
+import sys
+import os
+
 from my_functools import (do_command,
                           do_commands,
                           write_file,
                           logg)
-from ald_domen_settings import *
+
 from general_commands import (stop_network_manager,
                               write_network_interfaces,
                               restart_and_switch_networking,
@@ -13,6 +16,11 @@ from general_commands import (stop_network_manager,
                               reboot,
                               set_hostname,
                               restart_networking)
+
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT_DIR)
+
+from ald_domen_settings import *
 
 FULL_HOSTNAME = HOSTNAME + "." + DOMAIN
 
