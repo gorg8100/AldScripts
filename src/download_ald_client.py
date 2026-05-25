@@ -23,6 +23,9 @@ from ald_client_settings import *
 
 FULL_HOSTNAME = HOSTNAME + "." + DOMAIN
 
+if not DNS:
+    DNS = DOMAIN_ADDRESS
+
 
 @logg
 def restart_network_manager():
@@ -81,7 +84,7 @@ def main():
     else:
         write_network_manager_conf_d()
         restart_network_manager()
-    write_resolv(DOMAIN_ADDRESS, DOMAIN)
+    write_resolv(DNS, DOMAIN)
     write_hosts()
     set_hostname(FULL_HOSTNAME)
 

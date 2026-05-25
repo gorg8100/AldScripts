@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo aldpro-client-installer
+sudo python3 src/entry_ald_client.py

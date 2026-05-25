@@ -5,6 +5,7 @@ STATIC_ADDRESS = False
 ADDRESS = "10.0.2.30"
 NETMASK = "255.255.255.0"
 GATEWAY = "10.0.2.1"
+DNS = "8.8.8.8"
 
 HOSTNAME = "pcct"
 DOMAIN = "ald.company.lan"
