@@ -23,9 +23,17 @@ def mkdir_p(dir_path: str):
         os.makedirs(dir_path)
 
 
-def write_file(file_path: str, text: str, make_path: bool = False):
+def write_file(file_path: str, text: str):
     with open(file_path, "w") as file:
         file.write(text)
+
+
+def change_file_text(file_path: str, pattern: str, s: str):
+    with open(file_path, "r+") as file:
+        text = file.read()
+        new_text = text.replace(pattern, s)
+        file.write(new_text)
+    return
 
 
 def logg(func):

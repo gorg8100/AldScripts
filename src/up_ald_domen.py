@@ -78,6 +78,21 @@ def server_promotion():
     do_command(f"aldpro-server-install -d {DOMAIN} -n {HOSTNAME} --ip {ADDRESS} --no-reboot", inp=PASSWORD)
 
 
+@logg
+def write_bind_ipa_options_ext():
+    text = f"""
+allow-recursion {{ {ALLOW_RECURSION}; }};
+allow-query-cache {{ {ALLOW_QUERY_CACHE}; }};
+dnssec-validation {DNSSEC_VALIDATION};
+    """
+    write_file(" /etc/bind/ipa-options-ext.conf", text)
+
+
+@logg
+def check_bind_conf():
+    do_command("named-checkconf /etc/bind/named.conf")
+
+
 def main():
     if STOP_NETWORK_MANAGER:
         stop_network_manager()
@@ -100,7 +115,11 @@ def main():
     write_resolv_local_dns()
     restart_networking()
     server_promotion()
-    reboot()
+    if ADDITIONAL_IPA_CONFIGURATION:
+        write_bind_ipa_options_ext()
+        check_bind_conf()
+    if REBOOT:
+        reboot()
     return
 
 
